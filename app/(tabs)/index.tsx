@@ -1,10 +1,11 @@
+import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchMovies } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import { Link, useRouter } from "expo-router";
-import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function Index() {
     data: movies,
     loading: moviesLoading,
     error: moviesError,
-  } = useFetch(() => fetchMovies({ query: "" }));
+  } = useFetch(() => fetchMovies({ query: "demon slayer" }));
 
   return (
     <View className="flex-1 bg-primary">
@@ -23,7 +24,7 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
       >
-        <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
+        <Image source={icons.logo} className="w-12 h-10 mt-10 mb-5 mx-auto" />
 
         {moviesLoading ? (
           <ActivityIndicator
@@ -42,6 +43,26 @@ export default function Index() {
 
             <>
               <Text className="text-lg text-white font-bold mt-5 mb-3">Latest Movies</Text>
+
+              <FlatList
+                data={movies}
+                renderItem={({item}) => (
+                  <MovieCard
+                   {...item}
+                  />
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                numColumns={3}
+                columnWrapperStyle = {{
+                  justifyContent: "flex-start",
+                  gap: 20,
+                  paddingRight: 20,
+                  marginBottom: 10,
+                }}
+
+                className="mt-2 pb-32"
+                scrollEnabled={false}
+              />
             </>
           </View>
         )}
