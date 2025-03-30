@@ -44,7 +44,7 @@ const Details = () => {
 
   return (
     <View className="bg-primary flex-1">
-      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <View>
           <Image
             source={{
@@ -114,7 +114,7 @@ const Details = () => {
       </ScrollView>
 
       <TouchableOpacity
-        className="absolute bottom-5 left-0 right-0 mx-5 bg-accent rounded-lg py-3.5 flex flex-row items-center justify-center z-50"
+        className="absolute bottom-10 left-0 right-0 mx-5 bg-accent rounded-lg py-3.5 flex flex-row items-center justify-center z-50"
         onPress={router.back}
       >
         <Image
